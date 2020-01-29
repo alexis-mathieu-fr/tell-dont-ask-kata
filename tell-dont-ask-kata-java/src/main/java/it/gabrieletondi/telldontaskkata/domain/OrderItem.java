@@ -2,9 +2,6 @@ package it.gabrieletondi.telldontaskkata.domain;
 
 import java.math.BigDecimal;
 
-import static java.math.BigDecimal.valueOf;
-import static java.math.RoundingMode.HALF_UP;
-
 public class OrderItem {
     private Product product;
     private int quantity;
@@ -41,11 +38,5 @@ public class OrderItem {
 
     public void setTax(BigDecimal tax) {
         this.tax = tax;
-    }
-
-    public BigDecimal computeTax() {
-        BigDecimal unitaryTax = product.getPrice().divide(valueOf(100)).multiply(product.getCategory().getTaxPercentage()).setScale(2, HALF_UP);
-
-        return unitaryTax.multiply(BigDecimal.valueOf(quantity));
     }
 }
