@@ -60,6 +60,8 @@ public class Order {
     }
 
     public void addItem(OrderItem orderItem) {
-        getItems().add(orderItem);
+        items.add(orderItem);
+        total = total.add(orderItem.getTaxedAmount());
+        tax = tax.add(orderItem.getTax());
     }
 }

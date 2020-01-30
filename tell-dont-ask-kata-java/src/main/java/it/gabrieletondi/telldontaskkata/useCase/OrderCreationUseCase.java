@@ -36,28 +36,12 @@ public class OrderCreationUseCase {
                 throw new UnknownProductException();
             }
             else {
-
-
-                final OrderItem orderItem = constructOrderItem(itemRequest, product);
+                final OrderItem orderItem = product.constructOrderItem(itemRequest.getQuantity());
 
                 order.addItem(orderItem);
-
-                order.setTotal(order.getTotal().add(product.getTaxedAmount(itemRequest.getQuantity())));
-                order.setTax(order.getTax().add(product.getUnitaryTax().multiply(BigDecimal.valueOf(itemRequest.getQuantity()))));
             }
         }
 
         orderRepository.save(order);
     }
-
-    private OrderItem constructOrderItem(SellItemRequest itemRequest, Product product) {
-        final OrderItem orderItem = new OrderItem();
-        orderItem.setProduct(product);
-        orderItem.setQuantity(itemRequest.getQuantity());
-        orderItem.setTax(product.getUnitaryTax().multiply(BigDecimal.valueOf(itemRequest.getQuantity())));
-        orderItem.setTaxedAmount(product.getTaxedAmount(itemRequest.getQuantity()));
-        return orderItem;
-    }
-
-
 }
