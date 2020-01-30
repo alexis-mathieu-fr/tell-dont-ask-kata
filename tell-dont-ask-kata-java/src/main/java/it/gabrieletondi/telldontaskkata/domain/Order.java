@@ -58,4 +58,8 @@ public class Order {
     public void setId(int id) {
         this.id = id;
     }
+
+    public void addItem(OrderItem orderItem) {
+        getItems().add(orderItem);
+    }
 }
