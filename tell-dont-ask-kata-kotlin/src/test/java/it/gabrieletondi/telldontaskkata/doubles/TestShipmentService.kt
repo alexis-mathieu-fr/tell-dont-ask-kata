@@ -1,7 +1,7 @@
-package test.java.it.gabrieletondi.telldontaskkata.doubles
+package it.gabrieletondi.telldontaskkata.doubles
 
-import main.java.it.gabrieletondi.telldontaskkata.domain.Order
-import main.java.it.gabrieletondi.telldontaskkata.service.ShipmentService
+import it.gabrieletondi.telldontaskkata.domain.Order
+import it.gabrieletondi.telldontaskkata.service.ShipmentService
 
 
 class TestShipmentService : ShipmentService {

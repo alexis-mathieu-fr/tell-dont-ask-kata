@@ -1,6 +1,6 @@
-package main.java.it.gabrieletondi.telldontaskkata.service
+package it.gabrieletondi.telldontaskkata.service
 
-import main.java.it.gabrieletondi.telldontaskkata.domain.Order
+import it.gabrieletondi.telldontaskkata.domain.Order
 
 interface ShipmentService {
     fun ship(order: Order)

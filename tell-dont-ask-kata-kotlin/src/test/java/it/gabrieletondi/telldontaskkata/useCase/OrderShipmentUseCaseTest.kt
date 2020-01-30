@@ -1,18 +1,15 @@
-package test.java.it.gabrieletondi.telldontaskkata.useCase
+package it.gabrieletondi.telldontaskkata.useCase
 
-import main.java.it.gabrieletondi.telldontaskkata.domain.Order
-import main.java.it.gabrieletondi.telldontaskkata.domain.OrderStatus
-import main.java.it.gabrieletondi.telldontaskkata.useCase.OrderCannotBeShippedException
-import main.java.it.gabrieletondi.telldontaskkata.useCase.OrderCannotBeShippedTwiceException
-import main.java.it.gabrieletondi.telldontaskkata.useCase.OrderShipmentRequest
-import main.java.it.gabrieletondi.telldontaskkata.useCase.OrderShipmentUseCase
+import it.gabrieletondi.telldontaskkata.domain.Order
+import it.gabrieletondi.telldontaskkata.domain.OrderStatus
+
 import org.junit.Test
 
 import org.hamcrest.Matchers.`is`
 import org.hamcrest.Matchers.nullValue
 import org.junit.Assert.assertThat
-import test.java.it.gabrieletondi.telldontaskkata.doubles.TestOrderRepository
-import test.java.it.gabrieletondi.telldontaskkata.doubles.TestShipmentService
+import it.gabrieletondi.telldontaskkata.doubles.TestOrderRepository
+import it.gabrieletondi.telldontaskkata.doubles.TestShipmentService
 
 class OrderShipmentUseCaseTest {
     private val orderRepository = TestOrderRepository()

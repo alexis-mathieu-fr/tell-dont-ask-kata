@@ -1,8 +1,8 @@
-package test.java.it.gabrieletondi.telldontaskkata.doubles
+package it.gabrieletondi.telldontaskkata.doubles
 
 
-import main.java.it.gabrieletondi.telldontaskkata.domain.Product
-import main.java.it.gabrieletondi.telldontaskkata.repository.ProductCatalog
+import it.gabrieletondi.telldontaskkata.domain.Product
+import it.gabrieletondi.telldontaskkata.repository.ProductCatalog
 
 class InMemoryProductCatalog(private val products: List<Product>) : ProductCatalog {
 

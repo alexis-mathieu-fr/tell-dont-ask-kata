@@ -1,4 +1,4 @@
-package main.java.it.gabrieletondi.telldontaskkata.useCase
+package it.gabrieletondi.telldontaskkata.useCase
 
 class OrderApprovalRequest {
     var orderId: Int = 0

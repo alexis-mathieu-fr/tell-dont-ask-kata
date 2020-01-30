@@ -1,8 +1,8 @@
-package main.java.it.gabrieletondi.telldontaskkata.useCase
+package it.gabrieletondi.telldontaskkata.useCase
 
-import main.java.it.gabrieletondi.telldontaskkata.domain.OrderStatus
-import main.java.it.gabrieletondi.telldontaskkata.repository.OrderRepository
-import main.java.it.gabrieletondi.telldontaskkata.service.ShipmentService
+import it.gabrieletondi.telldontaskkata.domain.OrderStatus
+import it.gabrieletondi.telldontaskkata.repository.OrderRepository
+import it.gabrieletondi.telldontaskkata.service.ShipmentService
 
 
 class OrderShipmentUseCase(private val orderRepository: OrderRepository, private val shipmentService: ShipmentService) {

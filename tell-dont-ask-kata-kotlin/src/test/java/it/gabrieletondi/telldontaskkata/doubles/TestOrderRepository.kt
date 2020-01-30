@@ -1,9 +1,9 @@
-package test.java.it.gabrieletondi.telldontaskkata.doubles
+package it.gabrieletondi.telldontaskkata.doubles
 
 
 
-import main.java.it.gabrieletondi.telldontaskkata.domain.Order
-import main.java.it.gabrieletondi.telldontaskkata.repository.OrderRepository
+import it.gabrieletondi.telldontaskkata.domain.Order
+import it.gabrieletondi.telldontaskkata.repository.OrderRepository
 import java.util.ArrayList
 
 class TestOrderRepository : OrderRepository {
