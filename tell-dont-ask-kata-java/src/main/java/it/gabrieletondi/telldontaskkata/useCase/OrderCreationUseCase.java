@@ -37,25 +37,26 @@ public class OrderCreationUseCase {
             }
             else {
 
-                final BigDecimal unitaryTax = product.getUnitaryTax();
-                final BigDecimal taxedAmount = product.getTaxedAmount(itemRequest
-                        .getQuantity());
-                final BigDecimal taxAmount = unitaryTax.multiply(BigDecimal.valueOf(itemRequest
-                        .getQuantity()));
 
-                final OrderItem orderItem = new OrderItem();
-                orderItem.setProduct(product);
-                orderItem.setQuantity(itemRequest.getQuantity());
-                orderItem.setTax(taxAmount);
-                orderItem.setTaxedAmount(taxedAmount);
+                final OrderItem orderItem = constructOrderItem(itemRequest, product);
+
                 order.addItem(orderItem);
 
-                order.setTotal(order.getTotal().add(taxedAmount));
-                order.setTax(order.getTax().add(taxAmount));
+                order.setTotal(order.getTotal().add(product.getTaxedAmount(itemRequest.getQuantity())));
+                order.setTax(order.getTax().add(product.getUnitaryTax().multiply(BigDecimal.valueOf(itemRequest.getQuantity()))));
             }
         }
 
         orderRepository.save(order);
+    }
+
+    private OrderItem constructOrderItem(SellItemRequest itemRequest, Product product) {
+        final OrderItem orderItem = new OrderItem();
+        orderItem.setProduct(product);
+        orderItem.setQuantity(itemRequest.getQuantity());
+        orderItem.setTax(product.getUnitaryTax().multiply(BigDecimal.valueOf(itemRequest.getQuantity())));
+        orderItem.setTaxedAmount(product.getTaxedAmount(itemRequest.getQuantity()));
+        return orderItem;
     }
 
 
