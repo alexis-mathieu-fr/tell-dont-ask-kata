@@ -11,7 +11,6 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 
 import static java.math.BigDecimal.valueOf;
-import static java.math.RoundingMode.HALF_UP;
 
 public class OrderCreationUseCase {
     private final OrderRepository orderRepository;
@@ -39,10 +38,8 @@ public class OrderCreationUseCase {
             else {
 
                 final BigDecimal unitaryTax = product.getUnitaryTax();
-                final BigDecimal unitaryTaxedAmount = product.getPrice().add(unitaryTax)
-                        .setScale(2, HALF_UP);
-                final BigDecimal taxedAmount = unitaryTaxedAmount.multiply(BigDecimal.valueOf(itemRequest
-                        .getQuantity())).setScale(2, HALF_UP);
+                final BigDecimal taxedAmount = product.getTaxedAmount(itemRequest
+                        .getQuantity());
                 final BigDecimal taxAmount = unitaryTax.multiply(BigDecimal.valueOf(itemRequest
                         .getQuantity()));
 
