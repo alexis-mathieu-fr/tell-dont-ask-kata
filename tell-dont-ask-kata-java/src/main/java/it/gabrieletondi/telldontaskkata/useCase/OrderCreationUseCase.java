@@ -30,18 +30,21 @@ public class OrderCreationUseCase {
         order.setTax(new BigDecimal("0.00"));
 
         for (SellItemRequest itemRequest : request.getRequests()) {
-            Product product = productCatalog.getByName(itemRequest.getProductName());
+            Product product = getProduct(itemRequest);
+            final OrderItem orderItem = product.constructOrderItem(itemRequest.getQuantity());
 
-            if (product == null) {
-                throw new UnknownProductException();
-            }
-            else {
-                final OrderItem orderItem = product.constructOrderItem(itemRequest.getQuantity());
-
-                order.addItem(orderItem);
-            }
+            order.addItem(orderItem);
         }
 
         orderRepository.save(order);
+    }
+
+    private Product getProduct(SellItemRequest itemRequest) {
+        Product product = productCatalog.getByName(itemRequest.getProductName());
+
+        if (product == null) {
+            throw new UnknownProductException();
+        }
+        return product;
     }
 }
