@@ -1,0 +1,3 @@
+class ShippedOrdersCannotBeChangedError < StandardError
+
+end

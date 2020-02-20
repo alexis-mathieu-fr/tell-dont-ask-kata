@@ -1,0 +1,3 @@
+class OrderCannotBeShippedError < StandardError
+
+end
