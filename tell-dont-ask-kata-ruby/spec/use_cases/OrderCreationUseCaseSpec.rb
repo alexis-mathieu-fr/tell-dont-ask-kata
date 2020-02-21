@@ -9,30 +9,30 @@ require_relative "../../use_cases/SellItemsRequest"
 
 describe OrderCreationUseCase do
 
-  let(:food) { Category.new("food", 10) }
+  let(:food) { Category.new(:name => "food", :tax_percentage => 10) }
   let(:order_database) { OrderDatabase.new() }
-  let(:product_catalog) { ProductCatalog.new(
- [
-            Product.new("salad", 3.56, food),
-            Product.new("tomato", 4.65, food)
-          ])
+  let(:product_catalog) {
+    ProductCatalog.new(
+      :products => [
+          Product.new(:name => "salad", :price => 3.56, :category => food),
+          Product.new(:name => "tomato", :price => 4.65, :category => food)
+      ]
+    )
   }
-  let(:use_case) { OrderCreationUseCase.new(order_database, product_catalog) }
+  let(:use_case) {
+    OrderCreationUseCase.new(
+        :order_database => order_database,
+        :product_catalog => product_catalog
+    )
+  }
 
   it "sets up an order with multiple items correctly" do
-    salad_request = SellItemRequest.new()
-    salad_request.product_name = "salad"
-    salad_request.quantity = 2
+    salad_request = SellItemRequest.new(:product_name => "salad", :quantity => 2)
+    tomato_request = SellItemRequest.new(:product_name => "tomato", :quantity => 3)
 
-    tomato_request = SellItemRequest.new()
-    tomato_request.product_name = "tomato"
-    tomato_request.quantity = 3
+    sell_items_request = SellItemsRequest.new(:requests => [salad_request, tomato_request])
 
-    sell_items_request = SellItemsRequest.new()
-    sell_items_request.requests << salad_request
-    sell_items_request.requests << tomato_request
-
-    use_case.run(sell_items_request)
+    use_case.run(:request => sell_items_request)
 
     inserted_order = order_database.inserted_order
 
@@ -54,13 +54,11 @@ describe OrderCreationUseCase do
   end
 
   it "throws unknown product error if the product is not in the catalog" do
-    unknown_item_request = SellItemRequest.new()
-    unknown_item_request.product_name = "unknown product"
+    unknown_item_request = SellItemRequest.new(:product_name => "unknown product")
 
-    sell_items_request = SellItemsRequest.new()
-    sell_items_request.requests << unknown_item_request
+    sell_items_request = SellItemsRequest.new(:requests => [unknown_item_request])
 
-    expect { use_case.run(sell_items_request)}.to raise_error("UnknownProductError")
+    expect { use_case.run(:request => sell_items_request)}.to raise_error("UnknownProductError")
 
   end
 end

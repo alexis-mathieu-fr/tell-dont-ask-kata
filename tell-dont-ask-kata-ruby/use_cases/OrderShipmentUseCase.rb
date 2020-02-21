@@ -8,13 +8,13 @@ class OrderShipmentUseCase
 
   attr_accessor :order_database, :shipment_service
 
-  def initialize (order_database, shipment_service)
+  def initialize (order_database:, shipment_service:)
     @order_database = order_database
     @shipment_service = shipment_service
   end
 
-  def run(request)
-    order = order_database.find_by_id(request.order_id)
+  def run(request:)
+    order = order_database.find_by_id(:order_id => request.order_id)
 
     if (order.status == OrderStatus::CREATED || order.status == OrderStatus::REJECTED)
       raise OrderCannotBeShippedError.new()
@@ -24,10 +24,10 @@ class OrderShipmentUseCase
       raise OrderCannotBeShippedTwiceError.new()
     end
 
-    shipment_service.ship(order)
+    shipment_service.ship(:order => order)
 
     order.status = (OrderStatus::SHIPPED)
-    @order_database.save(order)
+    @order_database.save(:order => order)
   end
 
 end

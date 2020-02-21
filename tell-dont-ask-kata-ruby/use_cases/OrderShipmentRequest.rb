@@ -1,5 +1,9 @@
 class OrderShipmentRequest
 
-    attr_accessor :order_id
+  attr_accessor :order_id
+
+  def initialize (order_id: nil)
+    @order_id = order_id
+  end
 
 end
