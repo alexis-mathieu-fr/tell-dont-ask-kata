@@ -1,0 +1,3 @@
+class UnknownProductError < StandardError
+
+end

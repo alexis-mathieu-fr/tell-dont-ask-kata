@@ -1,0 +1,3 @@
+class ApprovedOrderCannotBeRejectedError < StandardError
+
+end

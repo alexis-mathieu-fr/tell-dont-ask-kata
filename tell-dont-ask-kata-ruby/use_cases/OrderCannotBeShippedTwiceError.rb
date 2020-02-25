@@ -1,0 +1,3 @@
+class OrderCannotBeShippedTwiceError < StandardError
+
+end
