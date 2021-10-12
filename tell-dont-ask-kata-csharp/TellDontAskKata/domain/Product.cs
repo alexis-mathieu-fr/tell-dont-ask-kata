@@ -33,17 +33,17 @@ public class Product
 
     public decimal GetUnitaryTax()
     {
-        return price / 100 * Math.Round(category.GetTaxPercentage(), 2, MidpointRounding.ToEven);
+        return Math.Round(price / 100 * category.GetTaxPercentage(), 2, MidpointRounding.AwayFromZero);
     }
 
     public decimal GetUnitaryTaxedAmount()
     {
-        return price + GetUnitaryTax();
+        return Math.Round(price + GetUnitaryTax(),2, MidpointRounding.AwayFromZero);
     }
 
     public decimal GetTaxedAmount(int quantity)
     {
-        return GetUnitaryTaxedAmount() * Math.Round(Convert.ToDecimal(quantity), 2, MidpointRounding.ToEven);
+        return Math.Round(GetUnitaryTaxedAmount() * Convert.ToDecimal(quantity), 2, MidpointRounding.AwayFromZero);
     }
 
     public OrderItem ConstructOrderItem(int quantity)
